@@ -46,6 +46,8 @@ Creates a hidden `.git/` folder to start tracking changes,and that's how you kno
 
 `cd .git` and `ls` - will show you the contents of the .git directory. This is where git stores all the information about the repo, or `find .git`.
 
+`git status` - will show you the current state of your working directory and staging area, including what's staged, what's modified, and what's untracked.
+
 `git add`
 
 Adds files to the staging area (prepares them for commit).
