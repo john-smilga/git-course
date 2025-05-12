@@ -276,11 +276,6 @@ Merging combines changes from one branch into another, allowing you to bring tog
 
   When both branches point to the same commit, HEAD points to the branch you have checked out (e.g., main), and both branches reference the same spot in the commit history. This happens because no new commits have been made on either branch since they were last synchronized.
 
-  **Why merge into the feature branch first?**  
-   Merging `main` into your feature branch lets you update your feature with the latest changes from `main` and resolve any conflicts early. This makes the final merge back into `main` smoother and helps prevent surprises or conflicts later.
-
-💡 Rebasing is another way to integrate changes and create a cleaner history, but we'll cover it later.
-
 - To merge the `main` branch into `bugfix`:
 - Switch to `bugfix`: `git checkout/switch bugfix`
 - Since we just merged `feature` into `main`, main has new changes, so the branches have diverged, which means it won't be a fast-forward merge.
@@ -329,6 +324,9 @@ To delete a branch, you can use the `git branch -d <branch-name>` command. This 
 - Since the `test` branch has unmerged changes, Git will prevent the deletion.
 - To force delete the `test` branch, run `git branch -D test`.
 - Run `git branch` to see the current branches.
+
+**Why merge into the feature branch first?**  
+ Merging `main` into your feature branch lets you update your feature with the latest changes from `main` and resolve any conflicts early. This makes the final merge back into `main` smoother and helps prevent surprises or conflicts later.
 
 ## Rebase
 
