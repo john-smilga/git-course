@@ -468,8 +468,6 @@ The `git reset --hard HEAD~1` command is a powerful and potentially dangerous co
 
 If you use `HEAD~2` instead of `HEAD~1`, Git will move back two commits and permanently remove both the last commit and the one before it, along with all their changes. This means all changes from the last two commits will be permanently lost. Use this command with extreme caution, as there's no way to recover the changes once they're discarded. It's recommended to create a backup branch or stash your changes before using a hard reset if you're unsure about the consequences.
 
-## File Management Commands
-
 ## Reverting Unstaged Changes
 
 To discard changes in your working directory, you can use `git checkout`. Running `git checkout .` will revert all unstaged changes in the current directory and its subdirectories. To revert changes in a specific file, use `git checkout -- filename`. This command will restore the file to its state in the last commit, effectively discarding any unstaged changes you've made to that file.
