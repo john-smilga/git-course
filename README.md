@@ -358,7 +358,7 @@ Global Git configuration is useful because it sets up your default identity (nam
 The local config file is located in the `.git/config` directory of your repository. This file contains settings that are specific to that repository and override the global settings.
 You can view the local config file by running `git config --local --list` or by opening the `.git/config` file in a text editor.
 
-`git config --local --add user`
+`git config --local --add user.name "shakeAndBake"`
 
 `git config --global user.name "Your Name"` - will set the name that will be used for commits. This is a global setting, so it will apply to all repositories on your system. You can also set this on a per-repo basis by running the same command without the --global flag inside the repo.
 
@@ -366,7 +366,7 @@ You can view the local config file by running `git config --local --list` or by 
 
 If you run the same command `git config --global user.name "Your Name"` with different value, it add a new entry to the config file but it doesn't remove the old one. If you have multiple entries with the same key, you won't be able to remove just one of them. Instead, you will need to remove all of them and then add the new one. You can do this by running `git config --global --unset-all user.name` to remove all entries with the key user.name, and then run `git config --global user.name "Your Name"` to add the new entry.
 
-In Git, you can customize the default branch name used when initializing a new repository by setting the init.defaultBranch configuration. While main is the current standard and master was the legacy default, you can choose any name you like — even something fun like shakeAndBake. To set this globally, run git config --global init.defaultBranch shakeAndBake, and Git will use that as the initial branch name in all newly created repositories. This flexibility is especially useful for aligning with team conventions or personal preferences.
+In Git, you can customize the default branch name used when initializing a new repository by setting the init.defaultBranch configuration. While main is the current standard and master was the legacy default, you can choose any name you like — even something fun like shakeAndBake. To set this globally, run git config `--global init.defaultBranch shakeAndBake`, and Git will use that as the initial branch name in all newly created repositories. This flexibility is especially useful for aligning with team conventions or personal preferences.
 
 ## .gitignore
 
