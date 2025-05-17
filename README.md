@@ -5,7 +5,6 @@
 ## 📦 Git Installation and Configuration Essentials
 
 When you install Git for the first time, it's important to configure your **username** and **email address**. These settings are attached to every commit you make and help identify the author of the code changes.
-
 **Essential Git Config Commands**
 
 Run these in your terminal or Git Bash:
@@ -219,7 +218,7 @@ For all of the "terminal command enthusiasts," I think you will find this useful
 - navigate to `front-end` folder and run `git init` to initialize a new Git repository inside an existing repository
 - run `cd .git` followed by `git init` to initialize a new Git repository inside the `.git` directory
 
-Next, we’ll cover branches, merging, and rebasing. For now, we’ll stick to the “happy path” — a smooth workflow without errors or conflicts. Don’t worry, we’ll dive into handling those issues later.
+Next, we'll cover branches, merging, and rebasing. For now, we'll stick to the "happy path" — a smooth workflow without errors or conflicts. Don't worry, we'll dive into handling those issues later.
 
 ## Branches
 
@@ -330,7 +329,7 @@ To delete a branch, you can use the `git branch -d <branch-name>` command. This 
 
 ## Rebase
 
-Rebase rewrites commit history by moving a branch’s commits onto a new base, creating new commits with different hashes. It results in a cleaner, linear history but should be used carefully, especially on shared branches, to avoid conflicts and confusion.
+Rebase rewrites commit history by moving a branch's commits onto a new base, creating new commits with different hashes. It results in a cleaner, linear history but should be used carefully, especially on shared branches, to avoid conflicts and confusion.
 
 ⛔️ Don't use rebase on public branches, as it rewrites commit history and can cause confusion for collaborators. In our case, it's the main branch, so we won't use rebase here, since we would not do that in production.
 
@@ -357,16 +356,17 @@ Global Git configuration is useful because it sets up your default identity (nam
 
 The local config file is located in the `.git/config` directory of your repository. This file contains settings that are specific to that repository and override the global settings.
 You can view the local config file by running `git config --local --list` or by opening the `.git/config` file in a text editor.
+It works the same for the global
 
-`git config --local --add user.name "shakeAndBake"`
+These commands demonstrate local repository configuration, but they work identically for global configuration by replacing `--local` with `--global`:
 
-`git config --global user.name "Your Name"` - will set the name that will be used for commits. This is a global setting, so it will apply to all repositories on your system. You can also set this on a per-repo basis by running the same command without the --global flag inside the repo.
+- `git config --local --add user.name "Your Name"` - Adds a new user.name setting to the local repository configuration, allowing multiple values for the same setting.
 
-`git config --global --unset user.name "my new name"` - will remove the name that was set for commits. This is a global setting, so it will apply to all repositories on your system. You can also set this on a per-repo basis by running the same command without the --global flag inside the repo.
+- `git config --local --unset user.name` - Removes the user.name setting from the local repository configuration.
 
-If you run the same command `git config --global user.name "Your Name"` with different value, it add a new entry to the config file but it doesn't remove the old one. If you have multiple entries with the same key, you won't be able to remove just one of them. Instead, you will need to remove all of them and then add the new one. You can do this by running `git config --global --unset-all user.name` to remove all entries with the key user.name, and then run `git config --global user.name "Your Name"` to add the new entry.
+- `git config --global --unset-all user.name` - Removes all user.name settings from the global Git configuration.
 
-In Git, you can customize the default branch name used when initializing a new repository by setting the init.defaultBranch configuration. While main is the current standard and master was the legacy default, you can choose any name you like — even something fun like shakeAndBake. To set this globally, run git config `--global init.defaultBranch shakeAndBake`, and Git will use that as the initial branch name in all newly created repositories. This flexibility is especially useful for aligning with team conventions or personal preferences.
+- `git config --local user.name "Your Name"` - Sets the user.name for the current repository only, overriding any global settings.
 
 ## .gitignore
 
@@ -427,7 +427,20 @@ You can avoid entering a detached HEAD state by always checking out branches ins
 `git reflog` is a command that allows you to view the reference log of your Git repository. The reference log is a record of all the changes made to the HEAD pointer, including commits, checkouts, merges, and other operations. It provides a way to recover lost commits or branches by showing you the history of where HEAD has pointed in the past.
 `git reflog` is particularly useful when you accidentally delete a branch or commit, or when you want to find the commit hash of a previous state in your repository. The reflog is stored in the `.git/logs` directory and is automatically updated by Git whenever you make a change to the repository.`
 
-It's important to distinguish git reflog from `git log --oneline` as they serve different purposes: `git log --oneline` shows your commit history in a condensed format, displaying only the commit hash and message for each commit in your current branch's history. `git reflog` shows a history of all reference changes to HEAD, including operations like commits, checkouts, merges, resets, and rebases. It records where HEAD has pointed throughout your repository's history. While git log shows your formal commit history, `git reflog` includes all HEAD movements, making it valuable for recovering lost commits or branches after operations like hard resets or branch deletions.
+The key differences between `git reflog` and `git log` are:
+
+1. `git log` shows your formal commit history, displaying the commit hash and message for each commit in your current branch's history.
+
+2. `git reflog` shows a complete history of all HEAD movements, including:
+   - Commits
+   - Checkouts
+   - Merges
+   - Resets
+   - Rebases
+   - Branch deletions
+   - Any other operations that change where HEAD points
+
+Think of `git log` as your official commit history, while `git reflog` is like a detailed activity log that records every movement of HEAD, making it particularly useful for recovering lost commits or branches after operations like hard resets or branch deletions.
 
 ## Git Reset
 
@@ -436,7 +449,7 @@ Git reset is a powerful command that allows you to undo changes in your Git repo
 - `git reset --soft HEAD~1` - undo the last commit but keep the changes staged
 - `git reset --hard HEAD~1` - undo the last commit and discard all changes
 - `git reset --hard commitHash` - undo all changes and reset to a specific commit
-- `git reset` - Unstages changes by moving them from the staging area back to the working directory. Be careful with untracked files—if you add them and then run git reset, they’ll be deleted and can't be recovered.
+- `git reset` - Unstages changes by moving them from the staging area back to the working directory. Be careful with untracked files—if you add them and then run git reset, they'll be deleted and can't be recovered.
 
 💡 In this case, HEAD~1 refers to the commit history from git log, not the reference log from git reflog.
 
@@ -460,18 +473,6 @@ The `git reset --hard HEAD~1` command is a powerful and potentially dangerous co
 3. Reset the working directory to match the previous commit
 
 If you use `HEAD~2` instead of `HEAD~1`, Git will move back two commits and permanently remove both the last commit and the one before it, along with all their changes. This means all changes from the last two commits will be permanently lost. Use this command with extreme caution, as there's no way to recover the changes once they're discarded. It's recommended to create a backup branch or stash your changes before using a hard reset if you're unsure about the consequences.
-
-## File Management Commands
-
-**git ls-files**
-
-`git ls-files` is a command that shows information about files in the index (staging area) and working tree. It lists all files that Git is tracking, including those that are staged, modified, or untracked. This command is useful for seeing what files Git is aware of in your repository.
-
-**git rm**
-
-`git rm` is used to remove files from both the working directory and the Git repository. When you use `git rm`, it stages the deletion of the file, meaning you still need to commit the change. This command is different from simply deleting a file with `rm` because it also removes the file from Git's tracking system.
-
-When deleting files in Git, you have two main approaches. You can either delete the file manually using your system's `rm` command and then use `git add` to stage the deletion, or you can use `git rm` directly which handles both the deletion and staging in one step. Both methods achieve the same result, but `git rm` is more explicit about your intention to remove the file from version control.
 
 ## Reverting Unstaged Changes
 
