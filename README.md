@@ -385,6 +385,12 @@ In Git, you can customize the default branch name used when initializing a new r
 
 ## Git Stash
 
+- `git stash` - Temporarily saves your uncommitted changes and reverts your working directory to the last commit
+- `git stash list` - Shows all stashed changes with their unique identifiers (stash@{0}, stash@{1}, etc.)
+- `git stash pop` - Applies the most recent stash and removes it from the stash list
+- `git stash apply` - Applies the most recent stash while keeping it in the stash list
+- `git stash push -m "message"` - Creates a new stash with a descriptive message to help identify its contents
+
 `git stash` is a command that temporarily saves your uncommitted changes in a "stash" so you can work on something else without losing your progress. It's useful when you need to switch branches or pull changes from a remote repository but don't want to commit your current work yet.
 When you run `git stash`, Git takes your uncommitted changes (both staged and unstaged) and saves them in a special stash area. This allows you to revert your working directory to the last commit, making it clean and ready for other tasks.
 You can later apply the stashed changes back to your working directory using `git stash apply` or `git stash pop`. The difference is that `git stash pop` removes the stash after applying it, while `git stash apply` keeps the stash for future use.
