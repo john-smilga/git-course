@@ -385,7 +385,8 @@ These commands demonstrate local repository configuration, but they work identic
 
 ## Git Stash
 
-- `git stash` - Temporarily saves your uncommitted changes and reverts your working directory to the last commit
+- `git stash` - Temporarily saves your uncommitted changes and reverts your working directory to the last commit. This command only works for tracked files and requires at least one commit in the repository.
+
 - `git stash list` - Shows all stashed changes with their unique identifiers (stash@{0}, stash@{1}, etc.)
 - `git stash pop` - Applies the most recent stash and removes it from the stash list
 - `git stash apply` - Applies the most recent stash while keeping it in the stash list
